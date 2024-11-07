@@ -1,0 +1,11 @@
+<div class="sidebar">
+  @for (item of sideBarItems; track item){
+  <app-button
+    ><div>
+      <mat-icon class="icon">{{ item.icon }}</mat-icon>
+    </div>
+    <div>
+      <span class="label">{{ item.label }}</span>
+    </div></app-button
+  >}
+</div>

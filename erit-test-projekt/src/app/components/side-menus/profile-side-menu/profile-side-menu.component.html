@@ -1,8 +1,18 @@
 <div class="profile-side-menu">
-  @for(item of menuItems; track item){
-  <div class="menu-item">
-    <mat-icon>{{ item.icon }}</mat-icon>
-    <span>{{ item.label }}</span>
+  <!-- Loop through all items except the last one -->
+  <ng-container *ngFor="let item of menuItems | slice : 0 : -1">
+    <div class="menu-item">
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span>{{ item.label }}</span>
+    </div>
+  </ng-container>
+
+  <!-- Divider before the last item -->
+  <hr class="divider" />
+
+  <!-- Display the last item -->
+  <div *ngIf="menuItems.length" class="menu-item">
+    <mat-icon>{{ menuItems[menuItems.length - 1].icon }}</mat-icon>
+    <span>{{ menuItems[menuItems.length - 1].label }}</span>
   </div>
-  }
 </div>

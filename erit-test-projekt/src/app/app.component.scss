@@ -14,3 +14,17 @@
   padding: 20px;
   overflow-y: auto;
 }
+
+.corner-shape {
+  position: fixed;
+  top: 60px;
+  left: 80px;
+  width: 45px;
+  height: 45px;
+  background: radial-gradient(
+    circle at bottom right,
+    transparent 45px,
+    var(--primary-color) 36px
+  );
+  z-index: 10;
+}

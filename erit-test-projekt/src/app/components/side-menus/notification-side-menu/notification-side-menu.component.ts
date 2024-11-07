@@ -53,7 +53,7 @@ export class NotificationSideMenuComponent {
       time: '10:15 07.09.2024',
     },
     {
-      icon: 'check_circle',
+      icon: 'verified',
       message: 'Rating expires soon',
       sender: '',
       time: '11:48 05.09.2024',

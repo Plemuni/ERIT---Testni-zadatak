@@ -6,21 +6,22 @@
   flex-direction: column;
   align-items: flex-start;
   width: 152px;
-  background-color: #003769;
-  border-radius: 5px;
-  padding: 10px 0;
-  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.05);
-  z-index: 100;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius-medium);
+  padding: var(--padding-user-menu);
+  box-shadow: var(--box-shadow-light);
+  z-index: var(--z-index-dropdown);
+  font-family: "Open Sans", sans-serif;
 }
 
 .user-menu .menu-item {
-  padding: 6px 12px;
+  padding: var(--padding-notification-text);
   width: 100%;
-  font-size: 18px;
+  font-size: var(--font-size-menu-item);
   cursor: pointer;
-  color: #ffffff;
-}
+  color: var(--text-color-light);
 
-.user-menu .menu-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }

@@ -1,0 +1,33 @@
+<div class="notification-side-menu">
+  <h3>User Notifications</h3>
+  <hr class="divider" />
+
+  @for(notification of notifications; track notification){
+  <div
+    class="notification-item"
+    [class.clicked]="notification.clicked"
+    (click)="markAsClicked(notification)"
+  >
+    <mat-icon class="icon {{ notification.icon }}">{{
+      notification.icon
+    }}</mat-icon>
+    <div>
+      <strong>{{ notification.message }}</strong>
+      <p>{{ notification.sender }}</p>
+      <small>{{ notification.time }}</small>
+    </div>
+  </div>
+  }
+  <h4>Earlier</h4>
+
+  @for( notification of earlierNotifications; track notification){
+  <div class="notification-item earlier-item">
+    <mat-icon class="icon earlier-icon">{{ notification.icon }}</mat-icon>
+    <div>
+      <strong>{{ notification.message }}</strong>
+      <p>{{ notification.sender }}</p>
+      <small>{{ notification.time }}</small>
+    </div>
+  </div>
+  }
+</div>

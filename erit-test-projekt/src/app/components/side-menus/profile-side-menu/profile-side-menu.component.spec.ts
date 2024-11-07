@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DropdownComponent } from './dropdown.component';
+import { ProfileSideMenuComponent } from './profile-side-menu.component';
 
-describe('DropdownComponent', () => {
-  let component: DropdownComponent;
-  let fixture: ComponentFixture<DropdownComponent>;
+describe('ProfileSideMenuComponent', () => {
+  let component: ProfileSideMenuComponent;
+  let fixture: ComponentFixture<ProfileSideMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DropdownComponent]
+      imports: [ProfileSideMenuComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DropdownComponent);
+    fixture = TestBed.createComponent(ProfileSideMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

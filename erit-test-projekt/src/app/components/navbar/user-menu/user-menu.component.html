@@ -1,0 +1,7 @@
+<div class="user-menu">
+  @for(role of roles; track role){
+  <div class="menu-item" (click)="onRoleSelect(role)">
+    {{ role }}
+  </div>
+  }
+</div>

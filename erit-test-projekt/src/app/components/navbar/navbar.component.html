@@ -1,0 +1,29 @@
+<div class="navbar">
+  <div class="navbar-title"></div>
+  <div class="navbar-actions">
+    <app-button ariaLabel="User Profile" (buttonClick)="toggleUserMenu()">
+      <span class="user-info">Ime i Prezime | {{ selectedRole }}</span>
+      <div class="user-dropdown-icon">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </div>
+    </app-button>
+
+    <app-button
+      icon="person"
+      ariaLabel="User Profile"
+      (buttonClick)="toggleProfileDropdown()"
+    ></app-button>
+
+    <app-button
+      icon="notifications"
+      ariaLabel="Notifications"
+      (buttonClick)="toggleNotificationDropdown()"
+    ></app-button>
+  </div>
+  @if(isUserMenuVisible){
+  <app-user-menu (roleSelected)="onRoleSelected($event)"></app-user-menu>}
+  @if(isProfileDropdownVisible){
+  <app-profile-side-menu></app-profile-side-menu>}
+  @if(isNotificationDropdownVisible){
+  <app-notification-side-menu></app-notification-side-menu>}
+</div>

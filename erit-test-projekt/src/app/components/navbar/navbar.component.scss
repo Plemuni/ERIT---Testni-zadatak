@@ -1,6 +1,5 @@
 .navbar {
   box-sizing: border-box;
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -11,6 +10,7 @@
   justify-content: flex-end;
   padding: var(--padding-navbar);
   color: var(--text-color-light);
+  z-index: 10;
 }
 
 .navbar-title {

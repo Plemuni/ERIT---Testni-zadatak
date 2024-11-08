@@ -11,19 +11,15 @@
     <app-button
       icon="person"
       ariaLabel="User Profile"
-      (buttonClick)="toggleProfileDropdown()"
+      (buttonClick)="onToggleProfileDropdown()"
     ></app-button>
 
     <app-button
       icon="notifications"
       ariaLabel="Notifications"
-      (buttonClick)="toggleNotificationDropdown()"
+      (buttonClick)="onToggleNotificationDropdown()"
     ></app-button>
   </div>
   @if(isUserMenuVisible){
   <app-user-menu (roleSelected)="onRoleSelected($event)"></app-user-menu>}
-  @if(isProfileDropdownVisible){
-  <app-profile-side-menu></app-profile-side-menu>}
-  @if(isNotificationDropdownVisible){
-  <app-notification-side-menu></app-notification-side-menu>}
 </div>

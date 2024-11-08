@@ -7,18 +7,20 @@
   --divider-color: rgba(0, 0, 0, 0.05);
   --text-color-light: #ffffff;
   --text-color-muted: #a6a6a6;
-  --icon-color-message: #ed8133;
-  --icon-color-schedule: #3f51b5;
-  --icon-color-check: #4caf50;
+  --icon-color-alert: #c9060e;
+  --icon-color-accent1: #ed8133;
+  --icon-color-accent2: #0f75da;
+  --icon-color-accent3: #45ad20;
 
   // Font sizes
-  --font-size-title: 1.5rem;
+  --font-size-title: 20px;
   --font-size-user-info: 20px;
   --font-size-menu-item: 16px;
   --font-size-divider: 1px;
   --font-size-notification-item: 14px;
   --font-size-notification-item-small: 10px;
   --font-size-icon: 24px;
+  --font-type-titles: "Open Sans", sans-serif;
 
   // Padding and margin
   --padding-navbar: 0 20px;
@@ -31,11 +33,7 @@
 
   // Border radius
   --border-radius-small: 3px;
-  --border-radius-medium: 5px;
-
-  // Z-index
-  --z-index-dropdown: 100;
-  --z-index-navbar: 100;
+  --border-radius-medium: 10px;
 
   // Shadows
   --box-shadow-light: 0px 0px 30px var(--divider-color);

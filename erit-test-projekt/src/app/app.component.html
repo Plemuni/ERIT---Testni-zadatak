@@ -1,10 +1,31 @@
-<div class="layout">
-  <app-navbar></app-navbar>
-  <div class="main">
-    <app-sidebar></app-sidebar>
-    <div class="corner-shape"></div>
-    <div class="content">
+<app-navbar
+  (toggleNotificationDropdown)="onNotificationSidenavToggle()"
+  (toggleProfileDropdown)="onProfileSidenavToggle()"
+></app-navbar>
+<div class="main">
+  <mat-sidenav-container>
+    <mat-sidenav
+      position="start"
+      mode="side"
+      [opened]="true"
+      [fixedInViewport]="true"
+      [fixedTopGap]="60"
+      ><app-sidebar
+    /></mat-sidenav>
+    <mat-sidenav-content>
       <router-outlet></router-outlet>
-    </div>
-  </div>
+    </mat-sidenav-content>
+    <mat-sidenav
+      position="end"
+      mode="over"
+      [opened]="profileSidenavOpened || notificationSidenavOpened"
+      (closed)="onSidenavClosed()"
+      [fixedInViewport]="true"
+      [fixedTopGap]="60"
+    >
+      @if(profileSidenavOpened){
+      <app-profile-side-menu />} @if(notificationSidenavOpened){
+      <app-notification-side-menu />}</mat-sidenav
+    >
+  </mat-sidenav-container>
 </div>

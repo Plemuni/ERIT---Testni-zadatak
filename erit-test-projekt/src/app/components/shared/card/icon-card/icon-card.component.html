@@ -1,0 +1,74 @@
+<div class="card-header">
+  <h2>{{ title }}</h2>
+  @if(collapsable) {
+  <mat-icon class="arrow-icon" (click)="onToggleCardCollapse()">{{
+    collapsed ? "keyboard_arrow_up" : "keyboard_arrow_down"
+  }}</mat-icon>
+  }
+</div>
+@if (!collapsable || (collapsable && !collapsed)) {
+<mat-card class="card">
+  <mat-card-content class="card-content">
+    @if(!items.length) {
+    <b>No messages.</b>
+    } @else { @for (item of items; track item) {
+    <div class="item">
+      <!-- Main icon based on item status -->
+      @if(item.itemIcon.src){<img
+        [src]="item.itemIcon.src"
+        alt="Mail Status Icon"
+        class="mail-icon"
+      />} @else {
+      <mat-icon
+        class="icon"
+        [ngClass]="{
+          'success-icon': item.itemIcon.status === 'success',
+          'info-icon': item.itemIcon.status === 'info',
+          'error-icon': item.itemIcon.status === 'error'
+        }"
+        [ngStyle]="{ 'font-size': iconSize + 'px' }"
+      >
+        {{ item.itemIcon.type }} </mat-icon
+      >}
+
+      <!-- Dates with optional icons -->
+      <div class="dates-container">
+        @for (date of item.dates; track date) {
+        <div>
+          @if (date.icon) {
+          <mat-icon class="date-icon">{{ date.icon }}</mat-icon>
+          }
+          {{ date.date }}
+        </div>
+        }
+      </div>
+
+      <!-- Text content -->
+      <div class="content-wrapper">
+        <div class="item-text" [ngStyle]="{ 'max-height': iconSize + 'px' }">
+          @if (item.text.title) {
+          <b>{{ item.text.title }} |</b>
+          }
+          {{ item.text.content }}
+        </div>
+        <!-- Optional buttons -->
+        @if(item.buttons.length) {
+        <div class="spacer"></div>
+        <div class="buttons-container">
+          @for (button of item.buttons || []; track button) {
+          <button class="card-item-button" mat-button>
+            <img
+              [src]="button.src"
+              alt="Image"
+              (click)="onPinClicked(item, button.pin)"
+            />
+          </button>
+          }
+        </div>
+        }
+      </div>
+    </div>
+    } }
+  </mat-card-content>
+</mat-card>
+}

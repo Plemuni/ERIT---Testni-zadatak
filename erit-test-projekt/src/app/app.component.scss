@@ -7,10 +7,16 @@
 .main {
   display: flex;
   flex: 1;
+  background-color: var(--hover-background);
+  overflow: hidden;
 }
 
 .content {
-  flex: 1;
+  position: absolute;
+  top: 75px;
+  left: 80px;
+  right: 0;
+  bottom: 0;
   padding: 20px;
   overflow-y: auto;
 }
@@ -26,5 +32,29 @@
     transparent 45px,
     var(--primary-color) 36px
   );
-  z-index: 10;
+}
+.mat-drawer-side {
+  width: 80px;
+  border-radius: 0;
+}
+
+.mat-drawer-container {
+  width: 100%;
+}
+
+.mat-sidenav-container {
+  min-height: 100vh;
+  background-color: var(--hover-background);
+}
+
+::ng-deep.mat-drawer-inner-container {
+  overflow: hidden !important;
+}
+
+.mat-drawer-end {
+  overflow: hidden;
+  height: 100%;
+  border-radius: 0 !important;
+  width: max-content;
+  transition: 100ms;
 }

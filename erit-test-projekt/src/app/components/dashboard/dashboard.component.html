@@ -1,0 +1,20 @@
+<div class="d-flex">
+  <div>
+    <app-icon-card
+      [title]="'Warnings'"
+      [items]="(warningsService.warningsSubject$ | async) || []"
+      [iconSize]="20"
+    />
+    <app-icon-card
+      [title]="'New messages'"
+      [items]="(messagesService.messagesSubject$ | async) || []"
+      [collapsable]="true"
+    />
+    <app-icon-card
+      [title]="'Pinned messages'"
+      [items]="(pinnedMessagesService.pinnedMessagesSubject$ | async) || []"
+      [collapsable]="true"
+    />
+  </div>
+  <div></div>
+</div>

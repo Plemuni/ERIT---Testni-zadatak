@@ -1,16 +1,13 @@
 .notification-side-menu {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 60px;
-  right: 0;
-  width: 287px;
   background: var(--background-light);
   box-shadow: var(--box-shadow-light);
-  border-radius: var(--border-radius-medium);
   padding: var(--padding-notification-item);
-  z-index: var(--z-index-dropdown);
   font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
+  height: 100%;
+  width: max-content;
 
   h3,
   h4 {
@@ -71,7 +68,7 @@
       font-weight: 400;
 
       &.message {
-        color: var(--icon-color-message);
+        color: var(--icon-color-accent1);
       }
       &.schedule {
         color: var(--icon-color-schedule);

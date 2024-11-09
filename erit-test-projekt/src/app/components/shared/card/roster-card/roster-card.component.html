@@ -1,0 +1,19 @@
+<div class="card-header">
+  <h2>{{ title }}</h2>
+</div>
+<div class="d-flex">
+  @for (day of items; track day) {
+  <mat-card class="day-item">
+    <mat-card-header class="roster-day justify-content-center">
+      <mat-card-title class="roster-day">{{ day.day }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="day-content">
+      <span class="roster-code">{{ day.code }}</span>
+    </mat-card-content>
+    <mat-card-footer class="mat-card-footer justify-content-space-between">
+      <span class="roster-description">{{ day.footer?.description }}</span>
+      <mat-icon class="day-icon">{{ day.footer?.icon }}</mat-icon>
+    </mat-card-footer>
+  </mat-card>
+  }
+</div>

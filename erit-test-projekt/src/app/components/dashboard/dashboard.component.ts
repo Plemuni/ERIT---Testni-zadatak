@@ -6,11 +6,29 @@ import { MessagesService } from '../../services/messages/messages.service';
 import { PinnedMessagesService } from '../../services/messages/pinned-messages/pinned-messages.service';
 import { WarningsService } from '../../services/warnings/warnings.service';
 import { IconCardComponent } from '../shared/card/icon-card/icon-card.component';
+// import { RosterService } from '../../services/roster/roster.service';
+// import { ChangeRequestsSentService } from '../../services/change-requests/change-requests-sent/change-requests-sent.service';
+// import { ChangeRequestsReceivedService } from '../../services/change-requests/change-requests-received/change-requests-received.service';
+// import { HoursService } from '../../services/hours/hours.service';
+import { ChangeRequestsReceivedService } from '../../services/change-requests/change-requests-received/change-requests-received.service';
+import { ChangeRequestsSentService } from '../../services/change-requests/change-requests-sent/change-requests-sent.service';
+import { HoursService } from '../../services/hours/hours.service';
+import { RosterService } from '../../services/roster/roster.service';
+import { RosterCardComponent } from '../shared/card/roster-card/roster-card.component';
+import { TableCardComponent } from '../shared/card/table-card/table-card.component';
+import { MatTableHeaders } from '../shared/models/mat-table-headers.interface';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, CommonModule, IconCardComponent],
+  imports: [
+    MatCardModule,
+    MatIconModule,
+    CommonModule,
+    IconCardComponent,
+    RosterCardComponent,
+    TableCardComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
@@ -18,124 +36,32 @@ export class DashboardComponent {
   warningsService = inject(WarningsService);
   messagesService = inject(MessagesService);
   pinnedMessagesService = inject(PinnedMessagesService);
+  rosterService = inject(RosterService);
+  changeRequestsSentService = inject(ChangeRequestsSentService);
+  changeRequestsReceivedService = inject(ChangeRequestsReceivedService);
+  hoursService = inject(HoursService);
 
-  roster = [
-    { day: 'Sun 15.09.', code: 'J', description: 'Obslana', dayIcon: 'notes' },
-    { day: 'Mon 16.09.', code: 'P', description: 'Prilaz', dayIcon: 'notes' },
-    { day: 'Tue 17.09.', code: 'N' },
-    { day: 'Wed 18.09.', code: 'N2' },
-    { day: 'Thu 19.09.', code: 'J', dayIcon: 'school' },
-  ];
+  tableHeadersChangeRequestsReceived: MatTableHeaders = {
+    header1: 'ROSTER',
+    header2: 'DATE',
+    header3: 'SHIFT',
+    header4: 'SENDER',
+    header5: 'STATUS',
+  };
 
-  changeRequestsReceived = [
-    {
-      roster: 'LDZO ACS',
-      date: '19.09.24’',
-      shift: 'N → N2',
-      sender: 'Petar Perić',
-      status1: 'pending',
-      status2: 'pending',
-    },
-    {
-      roster: 'LDZO ACS',
-      date: '23.09.24’',
-      shift: 'J → P',
-      sender: 'Marko Marić',
-      status1: 'approved',
-      status2: 'approved',
-    },
-    {
-      roster: 'LDZO ACS',
-      date: '24.09.24’',
-      shift: 'P → J',
-      sender: 'Tomislav Horvat',
-      status1: 'approved',
-      status2: 'denied',
-    },
-  ];
+  tableHeadersChangeRequestsSent: MatTableHeaders = {
+    header1: 'ROSTER',
+    header2: 'DATE',
+    header3: 'SHIFT',
+    header4: 'SENT TO',
+    header5: 'STATUS',
+  };
 
-  changeRequestsSent = [
-    {
-      roster: 'LDZO ACS',
-      date: '19.09.24’',
-      shift: 'N → N2',
-      sentTo: 'Petar Perić',
-      status1: 'approved',
-      status2: 'approved',
-    },
-    {
-      roster: 'LDZO ACS',
-      date: '23.09.24’',
-      shift: 'J → P',
-      sentTo: 'Marko Marić',
-      status1: 'denied',
-      status2: 'pending',
-    },
-    {
-      roster: 'LDZO ACS',
-      date: '24.09.24’',
-      shift: 'P → J',
-      sentTo: 'Tomislav Horvat',
-      status1: 'pending',
-      status2: 'approved',
-    },
-  ];
-
-  hours = [
-    {
-      license_unit: 'ACS_LDZO',
-      role: 'ACC',
-      last_work: '14.09.2024',
-      period: '02.09. - 01.12.',
-      hours: '27:32',
-      isVeryImportant: true,
-    },
-    {
-      license_unit: 'ACS_LDZO',
-      role: 'TMA_ZAG',
-      last_work: '17.09.2024',
-      period: '05.03. - 04.07.',
-      hours: '15:32',
-      isImportant: true,
-    },
-    {
-      license_unit: 'ACS_LDZO',
-      role: 'TMA_ZAG',
-      last_work: '17.09.2024',
-      period: '05.03. - 04.07.',
-      hours: '15:32',
-      isImportant: true,
-    },
-  ];
-
-  // togglePin(message: any) {
-  //   if (message.isPinned) {
-  //     message.isPinned = false;
-  //     this.pinnedMessages = this.pinnedMessages.filter(
-  //       (pinnedMessage) => pinnedMessage !== message
-  //     );
-  //   } else {
-  //     message.isPinned = true;
-  //     this.pinnedMessages.unshift(message);
-  //     this.newMessages = this.newMessages.filter(
-  //       (newMessage) => newMessage !== message
-  //     );
-  //   }
-  // }
-
-  // toggleNewMessagesCardVisibility() {
-  //   this.isNewMessagesCardOpen = !this.isNewMessagesCardOpen;
-  // }
-
-  // togglePinnedMessagesCardVisibility() {
-  //   this.isPinnedMessagesCardOpen = !this.isPinnedMessagesCardOpen;
-  // }
-
-  // toggleCardVisibility() {
-  //   this.isCardOpen = !this.isCardOpen;
-  // }
-
-  // toggleCheckmark(message: any) {
-  //   message.isGreenCheckmark = !message.isGreenCheckmark;
-  // }
+  tableHeadersHours: MatTableHeaders = {
+    header1: 'LICENSE_UNIT',
+    header2: 'ROLE',
+    header3: 'LAST WORK',
+    header4: 'PERIOD',
+    header5: 'HOURS',
+  };
 }

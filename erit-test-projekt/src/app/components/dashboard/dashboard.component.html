@@ -16,5 +16,29 @@
       [collapsable]="true"
     />
   </div>
-  <div></div>
+  <div>
+    <app-roster-card
+      [title]="'Roster'"
+      [items]="(rosterService.changeRequestsReceived$ | async) || []"
+    ></app-roster-card>
+    <app-table-card
+      [title]="'Change requests | RECEIVED'"
+      [items]="
+        (changeRequestsReceivedService.changeRequestsReceived$ | async) || []
+      "
+      [tableHeaders]="tableHeadersChangeRequestsReceived"
+    ></app-table-card>
+    <app-table-card
+      [title]="'Change requests | SENT'"
+      [items]="
+        (changeRequestsSentService.changeRequestsReceived$ | async) || []
+      "
+      [tableHeaders]="tableHeadersChangeRequestsSent"
+    ></app-table-card>
+    <app-table-card
+      [title]="'Hours'"
+      [items]="(hoursService.changeRequestsReceived$ | async) || []"
+      [tableHeaders]="tableHeadersHours"
+    ></app-table-card>
+  </div>
 </div>

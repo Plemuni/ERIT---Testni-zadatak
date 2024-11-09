@@ -31,7 +31,7 @@
 .card-content {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   padding: 0 !important;
 }
 
@@ -90,6 +90,8 @@
 .item-text {
   flex: 10;
   text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .spacer {

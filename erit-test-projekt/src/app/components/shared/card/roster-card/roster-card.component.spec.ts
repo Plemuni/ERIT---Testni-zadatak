@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataCardComponent } from './data-card.component';
+import { RosterCardComponent } from './roster-card.component';
 
-describe('DataCardComponent', () => {
-  let component: DataCardComponent;
-  let fixture: ComponentFixture<DataCardComponent>;
+describe('RosterCardComponent', () => {
+  let component: RosterCardComponent;
+  let fixture: ComponentFixture<RosterCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DataCardComponent],
+      imports: [RosterCardComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DataCardComponent);
+    fixture = TestBed.createComponent(RosterCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

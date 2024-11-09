@@ -11,6 +11,7 @@
   padding: var(--padding-navbar);
   color: var(--text-color-light);
   z-index: 10;
+  position: sticky;
 }
 
 .navbar-title {

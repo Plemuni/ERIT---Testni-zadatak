@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Subscription } from 'rxjs';
 import { ScreenService } from '../../../services/screen/screen.service';
 import { ButtonComponent } from '../../shared/button/button.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-footer',
@@ -12,7 +12,6 @@ import { ButtonComponent } from '../../shared/button/button.component';
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
-  private subscription = new Subscription();
   private readonly screenService = inject(ScreenService);
   sideBarItems = [
     { icon: 'folder_open', label: 'Documents' },
@@ -23,23 +22,21 @@ export class FooterComponent {
     { icon: 'school', label: 'Training' },
     { icon: 'running_with_errors', label: 'Warnings' },
   ];
-
+  destroyRef = inject(DestroyRef);
   isMobile: boolean = false;
   isTablet: boolean = false;
   ngOnInit(): void {
-    this.subscription = this.screenService.isMobile$.subscribe((isMobile) => {
-      this.isMobile = isMobile;
-    });
+    this.screenService.isMobileSubject$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((isMobile) => {
+        this.isMobile = isMobile;
+      });
 
-    this.subscription.add(
-      this.screenService.isTablet$.subscribe((isTablet) => {
+    this.screenService.isTabletSubject$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((isTablet) => {
         this.isTablet = isTablet;
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+      });
   }
   get filteredSideBarItems() {
     return this.isMobile || this.isTablet

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { IconCardItem } from '../../components/shared/models/icon-card.interface';
+import { MessageCardItem } from '../../components/shared/models/message-card.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessagesService {
-  messagesSubject$ = new BehaviorSubject<IconCardItem[]>([
+  messagesSubject$ = new BehaviorSubject<MessageCardItem[]>([
     {
       id: 4,
       itemIcon: {

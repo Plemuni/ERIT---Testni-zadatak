@@ -49,8 +49,7 @@
 }
 
 .mail-icon {
-  width: unset;
-  height: unset;
+  font-size: 36px;
 }
 
 .success-icon {
@@ -90,6 +89,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 100%;
+  max-height: 36px;
 }
 
 .spacer {
@@ -137,11 +137,6 @@
     line-height: 15.6px;
   }
 
-  .message-text-warning {
-    font-size: 16px;
-    line-height: 15.6px;
-  }
-
   img {
     width: 20px;
     height: 20px;
@@ -177,16 +172,6 @@
     flex-direction: column;
   }
 
-  .content-wrapper-warnings {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .date-text-warning {
-    font-size: 16px;
-    align-self: center;
-  }
-
   .messages-content {
     justify-content: center;
   }
@@ -197,5 +182,10 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+  }
+
+  .card-content {
+    gap: 5px;
+    overflow: visible;
   }
 }

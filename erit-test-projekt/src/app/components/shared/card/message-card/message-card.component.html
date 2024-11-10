@@ -1,20 +1,17 @@
-@if(isMobile) {
 <div class="card-header">
   <h2>{{ title }}</h2>
-  @if(collapsable) {
   <mat-icon class="arrow-icon" (click)="onToggleCardCollapse()">{{
     collapsed ? "keyboard_arrow_up" : "keyboard_arrow_down"
   }}</mat-icon>
-  }
 </div>
-@if (!collapsable || (collapsable && !collapsed)) {
+@if (!collapsed) {
 <mat-card class="card">
   <mat-card-content class="card-content">
     @if(!items.length) {
     <b>No messages.</b>
-    } @else { @for (item of limitedItems; track item) {
+    } @else { @for (item of isMobile ? limitedItems : items; track item) {
     <div class="item">
-      <!-- Main icon based on item status -->
+      @if(isMobile) {
       <div class="icon-card-icons">
         @if(item.itemIcon.src){<img
           [src]="item.itemIcon.src"
@@ -28,10 +25,9 @@
             'info-icon': item.itemIcon.status === 'info',
             'error-icon': item.itemIcon.status === 'error'
           }"
-          [ngStyle]="{ 'font-size': iconSize + 'px' }"
         >
           {{ item.itemIcon.type }} </mat-icon
-        >}@if(item.buttons.length) {
+        >}
         <div class="buttons-container">
           <button class="card-item-button" mat-button>
             <img
@@ -42,10 +38,7 @@
           </button>
         </div>
         <div class="spacer"></div>
-        }
       </div>
-
-      @if(item.dates.length > 1){
       <div>
         <div class="dates-container-messages">
           @for (date of item.dates; track date) {
@@ -65,64 +58,21 @@
         </div>
 
         <div class="content-wrapper">
-          <div class="item-text" [ngStyle]="{ 'max-height': iconSize + 'px' }">
+          <div class="item-text">
             <b
               [ngClass]="{ 'gray-text': title === 'Pinned messages' }"
               class="sender"
               >{{ item.text.title }}</b
             >
-
             <span
               [ngClass]="{ 'gray-text': title === 'Pinned messages' }"
               class="message-text"
               >{{ item.text.content }}</span
             >
           </div>
-          <!-- Optional buttons -->
         </div>
       </div>
-      } @else {
-      <div class="dates-container-warning">
-        @for (date of item.dates; track date) {
-        <span class="date-text-warning">{{ date.date }}</span>
-        }
-      </div>
-      <div class="content-wrapper-warnings">
-        <div
-          class="item-text-warning"
-          [ngStyle]="{ 'max-height': iconSize + 'px' }"
-        >
-          @if (item.text.title) {
-          <b class="sender">{{ item.text.title }} |</b>
-          }
-          <span class="message-text-warning">{{ item.text.content }}</span>
-        </div>
-        <!-- Optional buttons -->
-      </div>
-      }
-    </div>
-    } }
-  </mat-card-content>
-</mat-card>
-}} @else {
-
-<div class="card-header">
-  <h2>{{ title }}</h2>
-  @if(collapsable) {
-  <mat-icon class="arrow-icon" (click)="onToggleCardCollapse()">{{
-    collapsed ? "keyboard_arrow_up" : "keyboard_arrow_down"
-  }}</mat-icon>
-  }
-</div>
-@if (!collapsable || (collapsable && !collapsed)) {
-<mat-card class="card">
-  <mat-card-content class="card-content">
-    @if(!items.length) {
-    <b>No messages.</b>
-    } @else { @for (item of items; track item) {
-    <div class="item">
-      <!-- Main icon based on item status -->
-      @if(item.itemIcon.src){<img
+      } @else { @if(item.itemIcon.src){<img
         [src]="item.itemIcon.src"
         alt="Mail Status Icon"
         class="mail-icon"
@@ -134,22 +84,17 @@
           'info-icon': item.itemIcon.status === 'info',
           'error-icon': item.itemIcon.status === 'error'
         }"
-        [ngStyle]="{ 'font-size': iconSize + 'px' }"
       >
         {{ item.itemIcon.type }} </mat-icon
       >}
-
-      <!-- Dates with optional icons -->
       <div class="dates-container">
         @for (date of item.dates; track date) {
         <div>
-          @if (date.icon) {
           <mat-icon
             [ngClass]="{ 'gray-text': title === 'Pinned messages' }"
             class="date-icon"
             >{{ date.icon }}</mat-icon
           >
-          }
           <span
             [ngClass]="{ 'gray-text': title === 'Pinned messages' }"
             class="date-text"
@@ -158,25 +103,19 @@
         </div>
         }
       </div>
-
-      <!-- Text content -->
       <div class="content-wrapper">
-        <div class="item-text" [ngStyle]="{ 'max-height': iconSize + 'px' }">
-          @if (item.text.title) {
+        <div class="item-text">
           <b
             [ngClass]="{ 'gray-text': title === 'Pinned messages' }"
             class="sender"
             >{{ item.text.title }} |</b
           >
-          }
           <span
             [ngClass]="{ 'gray-text': title === 'Pinned messages' }"
             class="message-text"
             >{{ item.text.content }}</span
           >
         </div>
-        <!-- Optional buttons -->
-        @if(item.buttons.length) {
         <div class="spacer"></div>
         <div class="buttons-container">
           @for (button of item.buttons || []; track button) {
@@ -189,10 +128,10 @@
           </button>
           }
         </div>
-        }
       </div>
+      }
     </div>
     } }
   </mat-card-content>
 </mat-card>
-}}
+}

@@ -75,7 +75,7 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    bottom: 105px;
+    bottom: 65px;
   }
 
   .swipe-icon {
@@ -95,5 +95,9 @@
 
   .corner-shape {
     top: 52px;
+  }
+
+  .swipe-container {
+    bottom: 55px;
   }
 }

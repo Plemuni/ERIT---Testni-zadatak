@@ -5,17 +5,15 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ScreenService {
-  private isMobileSubject = new BehaviorSubject<boolean>(false);
-  isMobile$ = this.isMobileSubject.asObservable();
+  public isMobileSubject$ = new BehaviorSubject<boolean>(false);
 
-  private isTabletSubject = new BehaviorSubject<boolean>(false);
-  isTablet$ = this.isTabletSubject.asObservable();
+  public isTabletSubject$ = new BehaviorSubject<boolean>(false);
 
   setIsMobile(value: boolean) {
-    this.isMobileSubject.next(value);
+    this.isMobileSubject$.next(value);
   }
 
   setIsTablet(value: boolean) {
-    this.isTabletSubject.next(value);
+    this.isTabletSubject$.next(value);
   }
 }

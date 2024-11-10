@@ -1,18 +1,18 @@
-export interface IconCardItem {
-  id?: number;
+export interface MessageCardItem {
+  id: number;
   itemIcon: ItemIcon;
-  dates: IconCardDate[];
-  text: IconCardContent;
-  buttons: IconCardButton[];
+  dates: MessageCardDate[];
+  text: MessageCardContent;
+  buttons: MessageCardButton[];
 }
 
-interface IconCardContent {
-  title?: string;
+interface MessageCardContent {
+  title: string;
   content: string;
 }
 
-interface IconCardDate {
-  icon?: string;
+interface MessageCardDate {
+  icon: string;
   date: string;
 }
 
@@ -22,7 +22,7 @@ interface ItemIcon {
   src?: string;
 }
 
-interface IconCardButton {
+interface MessageCardButton {
   src: string;
   pin?: PinButton;
 }

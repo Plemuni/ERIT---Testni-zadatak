@@ -49,7 +49,7 @@ export class AppComponent {
     this.userMenuOpened = !this.userMenuOpened;
   }
 
-  private closeAllSidenavs(): void {
+  public closeAllSidenavs(): void {
     this.profileSidenavOpened = false;
     this.notificationSidenavOpened = false;
     this.userMenuOpened = false;

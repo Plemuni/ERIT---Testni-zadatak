@@ -7,6 +7,5 @@ import { routes } from './app.routes';
 @NgModule({
   imports: [BrowserModule, AppComponent],
   providers: [provideRouter(routes)],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

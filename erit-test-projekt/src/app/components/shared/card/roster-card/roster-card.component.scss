@@ -79,7 +79,7 @@
 .day-item {
   flex: 1;
   font-family: "Open Sans", sans-serif;
-  padding: 15px 15px 10px 15px;
+  padding: 5px;
   border-radius: 0;
   background-color: var(--text-color-light);
   font-size: 16px;
@@ -119,6 +119,7 @@
     font-size: 12px;
     font-weight: 600;
     line-height: 15.6px;
+    padding: 5px;
   }
 
   .day-content {
@@ -140,6 +141,8 @@
     font-size: 12px;
     line-height: 12px;
     text-align: center;
+    width: 14px;
+    height: 14px;
   }
 
   .day-item {

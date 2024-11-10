@@ -1,42 +1,48 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, DestroyRef, inject, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { IconCardItem, PinButton } from '../../models/icon-card.interface';
+import {
+  MessageCardItem,
+  PinButton,
+} from '../../models/message-card.interface';
 import { MessagesService } from '../../../../services/messages/messages.service';
 import { PinnedMessagesService } from '../../../../services/messages/pinned-messages/pinned-messages.service';
-import { Subscription, take } from 'rxjs';
 import { ScreenService } from '../../../../services/screen/screen.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { take } from 'rxjs';
 
 @Component({
-  selector: 'app-icon-card',
+  selector: 'app-message-card',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatIconModule],
-  templateUrl: './icon-card.component.html',
-  styleUrl: './icon-card.component.scss',
+  templateUrl: './message-card.component.html',
+  styleUrl: './message-card.component.scss',
 })
-export class IconCardComponent {
+export class MessageCardComponent {
   messagesService = inject(MessagesService);
   pinnedMessagesService = inject(PinnedMessagesService);
+  destroyRef = inject(DestroyRef);
 
   @Input() title?: string;
   @Input() collapsable?: boolean;
-  @Input() items: IconCardItem[] = [];
+  @Input() items: MessageCardItem[] = [];
   @Input() iconSize = 36;
 
   collapsed = false;
 
   isMobile: boolean = false;
-  private subscription: Subscription = new Subscription();
   private readonly screenService = inject(ScreenService);
 
   ngOnInit(): void {
-    this.subscription = this.screenService.isMobile$.subscribe((isMobile) => {
-      this.isMobile = isMobile;
-    });
+    this.screenService.isMobileSubject$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((isMobile) => {
+        this.isMobile = isMobile;
+      });
   }
 
-  public onPinClicked(item: IconCardItem, pin?: PinButton): void {
+  public onPinClicked(item: MessageCardItem, pin?: PinButton): void {
     if (!pin) {
       return;
     }
@@ -47,9 +53,9 @@ export class IconCardComponent {
     }
   }
 
-  private pinMessage(item: IconCardItem): void {
+  public pinMessage(item: MessageCardItem): void {
     this.pinnedMessagesService.pinnedMessagesSubject$.pipe(take(1)).subscribe({
-      next: (items: IconCardItem[]) => {
+      next: (items: MessageCardItem[]) => {
         const pinnedIds = items.map((item) => item.id);
         if (pinnedIds.includes(item.id)) {
           return;
@@ -70,7 +76,7 @@ export class IconCardComponent {
     });
   }
 
-  private unpinMessage(item: IconCardItem): void {
+  public unpinMessage(item: MessageCardItem): void {
     this.items?.splice(this.items.indexOf(item), 1);
     this.pinnedMessagesService.pinnedMessagesSubject$.next([...this.items]);
   }
@@ -79,7 +85,7 @@ export class IconCardComponent {
     this.collapsed = !this.collapsed;
   }
 
-  get limitedItems(): IconCardItem[] {
+  get limitedItems(): MessageCardItem[] {
     return this.isMobile && this.title === 'New messages'
       ? this.items.slice(0, 2)
       : this.items;

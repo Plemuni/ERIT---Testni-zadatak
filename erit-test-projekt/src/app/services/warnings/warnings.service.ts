@@ -1,55 +1,43 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { IconCardItem } from '../../components/shared/models/icon-card.interface';
+import { WarningsCardItem } from '../../components/shared/models/warnings-card.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WarningsService {
-  warningsSubject$ = new BehaviorSubject<IconCardItem[]>([
+  warningsSubject$ = new BehaviorSubject<WarningsCardItem[]>([
     {
       itemIcon: {
         status: 'info',
         type: 'check_circle',
       },
-      dates: [{ date: '24.09.2024' }],
-      text: {
-        content: 'Minimum rest time',
-      },
-      buttons: [],
+      date: '24.09.2024',
+      text: 'Minimum rest time',
     },
     {
       itemIcon: {
         status: 'error',
         type: 'error',
       },
-      dates: [{ date: '23.09.2024' }],
-      text: {
-        content: 'Minimum hours',
-      },
-      buttons: [],
+      date: '23.09.2024',
+      text: 'Minimum hours',
     },
     {
       itemIcon: {
         status: 'error',
         type: 'error',
       },
-      dates: [{ date: '19.09.2024' }],
-      text: {
-        content: 'Check time',
-      },
-      buttons: [],
+      date: '19.09.2024',
+      text: 'Check time',
     },
     {
       itemIcon: {
         status: 'info',
         type: 'check_circle',
       },
-      dates: [{ date: '17.09.2024' }],
-      text: {
-        content: 'Check time',
-      },
-      buttons: [],
+      date: '17.09.2024',
+      text: 'Check time',
     },
   ]);
 }

@@ -4,7 +4,7 @@
   (toggleProfileDropdown)="onProfileSidenavToggle()"
 ></app-navbar>
 <div class="main">
-  <mat-sidenav-container>
+  <mat-sidenav-container [hasBackdrop]="true">
     <mat-sidenav
       position="start"
       mode="side"
@@ -13,7 +13,7 @@
       [fixedTopGap]="60"
       ><app-sidebar
     /></mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content (click)="closeAllSidenavs()">
       <router-outlet></router-outlet>
     </mat-sidenav-content>
     <mat-sidenav

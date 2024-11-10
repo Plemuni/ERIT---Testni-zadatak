@@ -1,23 +1,22 @@
 <div class="container">
   @if(isMobile || isTablet){
   <div class="d-flex" (swiperight)="onSwipeRight()" (swipeleft)="onSwipeLeft()">
-    @if(currentSection === 1) {
-    <app-icon-card
+    @if (!isSmallHeightScreen) { @if(section === 1) {
+    <app-warnings-card
       title="Warnings"
       [items]="(warningsService.warningsSubject$ | async) || []"
-      [iconSize]="20"
-    ></app-icon-card>
-    <app-icon-card
+    ></app-warnings-card>
+    <app-message-card
       title="New messages"
       [items]="(messagesService.messagesSubject$ | async) || []"
       [collapsable]="true"
-    ></app-icon-card>
-    <app-icon-card
+    ></app-message-card>
+    <app-message-card
       title="Pinned messages"
       [items]="(pinnedMessagesService.pinnedMessagesSubject$ | async) || []"
       [collapsable]="true"
-    ></app-icon-card>
-    } @else if (currentSection === 2) {
+    ></app-message-card>
+    } @else if (section === 2) {
     <app-roster-card
       [title]="'Roster'"
       [items]="(rosterService.changeRequestsReceived$ | async) || []"
@@ -42,23 +41,67 @@
       [collapsable]="true"
       [tableHeaders]="isMobile ? mobileTableHeadersHours : tableHeadersHours"
     ></app-table-card>
-    }
+    } } @else { @if(section === 1) {
+    <app-warnings-card
+      title="Warnings"
+      [items]="(warningsService.warningsSubject$ | async) || []"
+    ></app-warnings-card>
+    } @else if (section === 2) {
+    <app-message-card
+      title="New messages"
+      [items]="(messagesService.messagesSubject$ | async) || []"
+      [collapsable]="true"
+    ></app-message-card>
+    } @else if (section === 3) {
+    <app-message-card
+      title="Pinned messages"
+      [items]="(pinnedMessagesService.pinnedMessagesSubject$ | async) || []"
+      [collapsable]="true"
+    ></app-message-card>
+    } @else if (section === 4) {
+    <app-roster-card
+      [title]="'Roster'"
+      [items]="(rosterService.changeRequestsReceived$ | async) || []"
+    ></app-roster-card>
+    } @else if (section === 5) {
+    <app-table-card
+      [title]="'Change requests | RECEIVED'"
+      [items]="
+        (changeRequestsReceivedService.changeRequestsReceived$ | async) || []
+      "
+      [tableHeaders]="tableHeadersChangeRequestsReceived"
+    ></app-table-card>
+    } @else if (section === 6) {
+    <app-table-card
+      [title]="'Change requests | SENT'"
+      [items]="
+        (changeRequestsSentService.changeRequestsReceived$ | async) || []
+      "
+      [tableHeaders]="tableHeadersChangeRequestsSent"
+    ></app-table-card>
+    } @else if (section === 7) {
+    <app-table-card
+      [title]="'Hours'"
+      [items]="(hoursService.changeRequestsReceived$ | async) || []"
+      [collapsable]="true"
+      [tableHeaders]="isMobile ? mobileTableHeadersHours : tableHeadersHours"
+    ></app-table-card>
+    } }
   </div>
   } @else {
 
   <div class="d-flex">
     <div class="column1">
-      <app-icon-card
+      <app-warnings-card
         [title]="'Warnings'"
         [items]="(warningsService.warningsSubject$ | async) || []"
-        [iconSize]="20"
       />
-      <app-icon-card
+      <app-message-card
         [title]="'New messages'"
         [items]="(messagesService.messagesSubject$ | async) || []"
         [collapsable]="true"
       />
-      <app-icon-card
+      <app-message-card
         [title]="'Pinned messages'"
         [items]="(pinnedMessagesService.pinnedMessagesSubject$ | async) || []"
         [collapsable]="true"

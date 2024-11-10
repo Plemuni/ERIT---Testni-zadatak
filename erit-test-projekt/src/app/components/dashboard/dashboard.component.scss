@@ -34,6 +34,7 @@
   .d-flex {
     flex-direction: column;
     gap: 10px;
+    overflow: auto;
   }
   .container {
     width: 100%;

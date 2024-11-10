@@ -1,0 +1,31 @@
+<div class="card-header">
+  <h2>{{ title }}</h2>
+</div>
+<mat-card class="card">
+  <mat-card-content class="card-content">
+    @if(!items.length) {
+    <b>No messages.</b>
+    } @else { @for (item of items; track item) {
+    <div class="item">
+      <mat-icon
+        class="mail-icon"
+        [ngClass]="{
+          'success-icon': item.itemIcon.status === 'success',
+          'info-icon': item.itemIcon.status === 'info',
+          'error-icon': item.itemIcon.status === 'error'
+        }"
+      >
+        {{ item.itemIcon.type }}
+      </mat-icon>
+      <div class="dates-container">
+        <span class="date-text">{{ item.date }}</span>
+      </div>
+      <div class="content-wrapper">
+        <div class="item-text">
+          <span class="message-text">{{ item.text }}</span>
+        </div>
+      </div>
+    </div>
+    } }
+  </mat-card-content>
+</mat-card>

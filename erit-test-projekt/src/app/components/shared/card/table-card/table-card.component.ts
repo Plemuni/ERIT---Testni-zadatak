@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, DestroyRef, inject, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
@@ -10,7 +10,7 @@ import {
 import { CdkTableDataSourceInput } from '@angular/cdk/table';
 import { MatTableHeaders } from '../../models/mat-table-headers.interface';
 import { ScreenService } from '../../../../services/screen/screen.service';
-import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-table-card',
@@ -25,14 +25,16 @@ export class TableCardComponent {
   @Input() tableHeaders!: MatTableHeaders;
   @Input() items: ChangeRequestItem[] | WorkTimeItem[] = [];
   isMobile: boolean = false;
-  private subscription: Subscription = new Subscription();
   private readonly screenService = inject(ScreenService);
   collapsed = false;
+  destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.subscription = this.screenService.isMobile$.subscribe((isMobile) => {
-      this.isMobile = isMobile;
-    });
+    this.screenService.isMobileSubject$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((isMobile) => {
+        this.isMobile = isMobile;
+      });
   }
 
   get displayedColumns(): string[] {
@@ -66,10 +68,6 @@ export class TableCardComponent {
           .join('')
           .toUpperCase()
       : sender;
-  }
-
-  formatPeriod(period: string): string {
-    return this.isMobile ? period.replace(/ - /g, '\n') : period;
   }
 
   public onToggleCardCollapse(): void {

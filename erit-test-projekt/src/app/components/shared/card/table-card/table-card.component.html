@@ -1,10 +1,13 @@
 <div class="card-header">
   <h2>{{ title }}</h2>
+  @if(collapsable) {
+  <mat-icon class="arrow-icon" (click)="onToggleCardCollapse()">{{
+    collapsed ? "keyboard_arrow_up" : "keyboard_arrow_down"
+  }}</mat-icon>
+  }
 </div>
+@if (!collapsable || (collapsable && !collapsed)){
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-table">
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
   <ng-container [matColumnDef]="tableHeaders.header1">
     <th mat-header-cell *matHeaderCellDef>{{ tableHeaders.header1 }}</th>
     <td mat-cell *matCellDef="let element">
@@ -51,7 +54,11 @@
   <ng-container [matColumnDef]="tableHeaders.header4">
     <th mat-header-cell *matHeaderCellDef>{{ tableHeaders.header4 }}</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.sender ?? element.sentTo ?? element.period }}
+      {{
+        getSenderDisplayName(element.sender) ||
+          getSenderDisplayName(element.sentTo) ||
+          element.period
+      }}
     </td>
   </ng-container>
 
@@ -61,6 +68,7 @@
       @if (element.status?.length) { @for(statusIcon of element.status; track
       statusIcon) {
       <mat-icon
+        class="status-icon"
         [ngClass]="{
           success: statusIcon.status === 'success',
           info: statusIcon.status === 'info',
@@ -83,3 +91,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+}

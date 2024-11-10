@@ -84,6 +84,7 @@
   background-color: var(--text-color-light);
   font-size: 16px;
   box-shadow: none;
+  border-right: 1px solid var(--icon-disabled-light);
 }
 
 .day-item:first-child {
@@ -91,9 +92,57 @@
   color: var(--text-color-light);
   border-top-left-radius: var(--border-radius-medium);
   border-bottom-left-radius: var(--border-radius-medium);
+  border-right: 0;
 }
 
 .day-item:last-child {
   border-top-right-radius: var(--border-radius-medium);
   border-bottom-right-radius: var(--border-radius-medium);
+  border-right: 0;
+}
+
+@media (max-width: 1260px) {
+  .day-item {
+    padding: 2px 2px 2px 2px;
+  }
+}
+
+@media (max-width: 600px) {
+  .card-header {
+    color: var(--secondary-color);
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 600px;
+    line-height: 16px;
+  }
+  .roster-day {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 15.6px;
+  }
+
+  .day-content {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 31.2px;
+  }
+
+  .roster-description {
+    font-weight: 400;
+    font-size: 7px;
+    line-height: 9.1px;
+    text-align: center;
+  }
+
+  .day-icon {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+  }
+
+  .day-item {
+    padding: 5px;
+  }
 }

@@ -5,7 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { IconCardItem, PinButton } from '../../models/icon-card.interface';
 import { MessagesService } from '../../../../services/messages/messages.service';
 import { PinnedMessagesService } from '../../../../services/messages/pinned-messages/pinned-messages.service';
-import { take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
+import { ScreenService } from '../../../../services/screen/screen.service';
 
 @Component({
   selector: 'app-icon-card',
@@ -24,6 +25,16 @@ export class IconCardComponent {
   @Input() iconSize = 36;
 
   collapsed = false;
+
+  isMobile: boolean = false;
+  private subscription: Subscription = new Subscription();
+  private readonly screenService = inject(ScreenService);
+
+  ngOnInit(): void {
+    this.subscription = this.screenService.isMobile$.subscribe((isMobile) => {
+      this.isMobile = isMobile;
+    });
+  }
 
   public onPinClicked(item: IconCardItem, pin?: PinButton): void {
     if (!pin) {
@@ -48,8 +59,8 @@ export class IconCardComponent {
           tempItem.itemIcon.status === 'error'
             ? 'mail-red-checkmark.png'
             : 'mail-green-checkmark.png';
-        if (tempItem.buttons[0]?.pin) {
-          tempItem.buttons[0] = { src: 'pinned.png', pin: 'unpin' };
+        if (tempItem.buttons[1]?.pin) {
+          tempItem.buttons[1] = { src: 'pinned.png', pin: 'unpin' };
         }
         this.pinnedMessagesService.pinnedMessagesSubject$.next([
           tempItem,
@@ -60,20 +71,17 @@ export class IconCardComponent {
   }
 
   private unpinMessage(item: IconCardItem): void {
-    console.log(
-      'items',
-      this.items,
-      'item',
-      item,
-      'index',
-      this.items.indexOf(item)
-    );
     this.items?.splice(this.items.indexOf(item), 1);
-    console.log(this.items);
     this.pinnedMessagesService.pinnedMessagesSubject$.next([...this.items]);
   }
 
   public onToggleCardCollapse(): void {
     this.collapsed = !this.collapsed;
+  }
+
+  get limitedItems(): IconCardItem[] {
+    return this.isMobile && this.title === 'New messages'
+      ? this.items.slice(0, 2)
+      : this.items;
   }
 }

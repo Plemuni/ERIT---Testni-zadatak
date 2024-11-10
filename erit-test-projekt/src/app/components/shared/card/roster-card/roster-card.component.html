@@ -2,7 +2,7 @@
   <h2>{{ title }}</h2>
 </div>
 <div class="d-flex">
-  @for (day of items; track day) {
+  @for (day of displayedItems; track day) {
   <mat-card class="day-item">
     <mat-card-header class="roster-day justify-content-center">
       <mat-card-title class="roster-day">{{ day.day }}</mat-card-title>

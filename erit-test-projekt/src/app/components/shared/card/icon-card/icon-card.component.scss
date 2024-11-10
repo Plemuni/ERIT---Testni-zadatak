@@ -3,7 +3,7 @@
   font-family: "Open Sans", sans-serif;
   line-height: 20px;
   font-size: 20px;
-  font-weight: 600px;
+  font-weight: 600px !important;
   display: flex;
   justify-content: space-between;
 }
@@ -33,12 +33,14 @@
   flex-direction: column;
   gap: 20px;
   padding: 0 !important;
+  overflow: hidden;
 }
 
 .item {
   display: flex;
   align-items: center;
   gap: 12px;
+  overflow: hidden;
 }
 
 .mat-icon {
@@ -46,7 +48,7 @@
   min-width: max-content;
 }
 
-.icon {
+.mail-icon {
   width: unset;
   height: unset;
 }
@@ -76,22 +78,18 @@
     width: max-content;
   }
 }
-
-.date-icon {
-  font-size: 16px;
-}
-
 .content-wrapper {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .item-text {
   flex: 10;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+  max-width: 100%;
 }
 
 .spacer {
@@ -106,4 +104,98 @@
 
 .buttons-container {
   align-self: flex-end;
+}
+
+.gray-text {
+  color: var(--text-disabled);
+}
+
+@media (max-width: 600px) {
+  .date-icon {
+    font-size: 16px;
+    line-height: 18.2px;
+    width: 16px;
+    margin-right: 5px;
+  }
+
+  .mail-icon {
+    font-size: 24px !important;
+  }
+
+  .date-text {
+    font-size: 12px;
+    line-height: 18.6px;
+  }
+
+  .sender {
+    font-size: 12px;
+    line-height: 15.6px;
+  }
+
+  .message-text {
+    font-size: 12px;
+    line-height: 15.6px;
+  }
+
+  .message-text-warning {
+    font-size: 16px;
+    line-height: 15.6px;
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .card {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .dates-container-messages {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: max-content;
+    }
+  }
+
+  .mail-icon {
+    width: 24px;
+    height: 22px;
+  }
+
+  .icon-card-icons {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-wrapper-warnings {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .date-text-warning {
+    font-size: 16px;
+    align-self: center;
+  }
+
+  .messages-content {
+    justify-content: center;
+  }
+
+  .item-text {
+    display: flex;
+    flex-direction: column;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }

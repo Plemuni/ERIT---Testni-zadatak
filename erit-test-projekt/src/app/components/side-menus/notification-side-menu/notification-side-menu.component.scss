@@ -12,10 +12,10 @@
   h3,
   h4 {
     color: var(--primary-color);
-    margin: 0 0 10px 0;
-    font-size: var(--font-size-notification-item);
+    margin: 12px 0 0 0;
+    font-size: var(--font-size-menu-item);
     font-weight: 400;
-    padding: var(--padding-notification-text);
+    padding: var(--padding-notification-item);
     opacity: 1;
   }
 
@@ -31,7 +31,7 @@
     align-items: center;
     gap: 10px;
     width: 100%;
-    padding: var(--padding-notification-item);
+    padding: var(--padding-notification-text);
     margin-bottom: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -41,23 +41,23 @@
     }
 
     &.clicked {
-      color: var(--text-color-muted);
+      color: var(--text-disabled);
 
       .icon {
-        color: var(--text-color-muted) !important;
+        color: var(--text-disabled) !important;
       }
 
       strong {
-        color: var(--text-color-muted);
+        color: var(--text-disabled);
         font-size: 14px;
       }
       p {
-        color: var(--text-color-muted);
+        color: var(--text-disabled);
         font-size: 10px;
       }
 
       small {
-        color: var(--text-color-muted);
+        color: var(--text-disabled);
         font-size: 8px;
       }
     }
@@ -94,7 +94,7 @@
     }
 
     small {
-      color: var(--text-color-muted);
+      color: var(--text-disabled);
       font-size: 8px;
       font-weight: 400;
       line-height: 10.4px;
@@ -102,13 +102,13 @@
   }
 
   .earlier-item {
-    color: var(--text-color-muted);
+    color: var(--text-disabled);
 
     .icon,
     strong,
     p,
     small {
-      color: var(--text-color-muted);
+      color: var(--text-disabled);
     }
   }
 }

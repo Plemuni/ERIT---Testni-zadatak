@@ -1,22 +1,23 @@
-<div class="d-flex">
-  <div>
+<div class="container">
+  @if(isMobile || isTablet){
+  <div class="d-flex" (swiperight)="onSwipeRight()" (swipeleft)="onSwipeLeft()">
+    @if(currentSection === 1) {
     <app-icon-card
-      [title]="'Warnings'"
+      title="Warnings"
       [items]="(warningsService.warningsSubject$ | async) || []"
       [iconSize]="20"
-    />
+    ></app-icon-card>
     <app-icon-card
-      [title]="'New messages'"
+      title="New messages"
       [items]="(messagesService.messagesSubject$ | async) || []"
       [collapsable]="true"
-    />
+    ></app-icon-card>
     <app-icon-card
-      [title]="'Pinned messages'"
+      title="Pinned messages"
       [items]="(pinnedMessagesService.pinnedMessagesSubject$ | async) || []"
       [collapsable]="true"
-    />
-  </div>
-  <div>
+    ></app-icon-card>
+    } @else if (currentSection === 2) {
     <app-roster-card
       [title]="'Roster'"
       [items]="(rosterService.changeRequestsReceived$ | async) || []"
@@ -38,7 +39,57 @@
     <app-table-card
       [title]="'Hours'"
       [items]="(hoursService.changeRequestsReceived$ | async) || []"
-      [tableHeaders]="tableHeadersHours"
+      [collapsable]="true"
+      [tableHeaders]="isMobile ? mobileTableHeadersHours : tableHeadersHours"
     ></app-table-card>
+    }
   </div>
+  } @else {
+
+  <div class="d-flex">
+    <div class="column1">
+      <app-icon-card
+        [title]="'Warnings'"
+        [items]="(warningsService.warningsSubject$ | async) || []"
+        [iconSize]="20"
+      />
+      <app-icon-card
+        [title]="'New messages'"
+        [items]="(messagesService.messagesSubject$ | async) || []"
+        [collapsable]="true"
+      />
+      <app-icon-card
+        [title]="'Pinned messages'"
+        [items]="(pinnedMessagesService.pinnedMessagesSubject$ | async) || []"
+        [collapsable]="true"
+      />
+    </div>
+    <div class="column2">
+      <app-roster-card
+        [title]="'Roster'"
+        [items]="(rosterService.changeRequestsReceived$ | async) || []"
+      ></app-roster-card>
+      <app-table-card
+        [title]="'Change requests | RECEIVED'"
+        [items]="
+          (changeRequestsReceivedService.changeRequestsReceived$ | async) || []
+        "
+        [tableHeaders]="tableHeadersChangeRequestsReceived"
+      ></app-table-card>
+      <app-table-card
+        [title]="'Change requests | SENT'"
+        [items]="
+          (changeRequestsSentService.changeRequestsReceived$ | async) || []
+        "
+        [tableHeaders]="tableHeadersChangeRequestsSent"
+      ></app-table-card>
+      <app-table-card
+        [title]="'Hours'"
+        [items]="(hoursService.changeRequestsReceived$ | async) || []"
+        [collapsable]="true"
+        [tableHeaders]="tableHeadersHours"
+      ></app-table-card>
+    </div>
+  </div>
+  }
 </div>

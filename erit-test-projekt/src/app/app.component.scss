@@ -1,7 +1,7 @@
 .layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 }
 
 .main {
@@ -20,18 +20,6 @@
   overflow-y: auto;
 }
 
-.corner-shape {
-  position: fixed;
-  top: 60px;
-  left: 80px;
-  width: 45px;
-  height: 45px;
-  background: radial-gradient(
-    circle at bottom right,
-    transparent 45px,
-    var(--primary-color) 36px
-  );
-}
 .mat-drawer-side {
   width: 80px;
   border-radius: 0;
@@ -42,7 +30,7 @@
 }
 
 .mat-sidenav-container {
-  min-height: 100vh;
+  min-height: 100%;
   background-color: var(--hover-background);
 }
 
@@ -51,9 +39,16 @@
 }
 
 .mat-drawer-end {
-  overflow: hidden;
   height: 100%;
   border-radius: 0 !important;
   width: max-content;
   transition: 100ms;
+}
+
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
 }

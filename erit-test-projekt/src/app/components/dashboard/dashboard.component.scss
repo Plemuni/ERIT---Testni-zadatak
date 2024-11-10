@@ -9,3 +9,36 @@
     flex-direction: column;
   }
 }
+
+.container {
+  position: fixed;
+  width: calc(100% - 80px);
+  height: 100%;
+  background-color: var(--hover-background);
+}
+
+.mat-icon {
+  height: auto;
+  width: auto;
+}
+
+.column1 {
+  width: 50%;
+}
+
+.column2 {
+  height: 100%;
+}
+
+@media (max-width: 1024px) {
+  .d-flex {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .container {
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    background-color: var(--hover-background);
+  }
+}

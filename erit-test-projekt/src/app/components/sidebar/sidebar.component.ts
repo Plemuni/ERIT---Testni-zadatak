@@ -1,11 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../shared/button/button.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ButtonComponent } from '../shared/button/button.component';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [ButtonComponent, MatIconModule],
+  imports: [ButtonComponent, MatIconModule, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })

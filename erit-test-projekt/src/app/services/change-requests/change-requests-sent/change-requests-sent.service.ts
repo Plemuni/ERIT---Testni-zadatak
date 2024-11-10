@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ChangeRequestItem } from '../../../components/shared/models/data-card.interface';
 import { BehaviorSubject } from 'rxjs';
+import { ChangeRequestItem } from '../../../components/shared/models/data-card.interface';
 
 @Injectable({
   providedIn: 'root',

@@ -1,19 +1,17 @@
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MessagesService } from '../../services/messages/messages.service';
-import { PinnedMessagesService } from '../../services/messages/pinned-messages/pinned-messages.service';
-import { WarningsService } from '../../services/warnings/warnings.service';
-import { IconCardComponent } from '../shared/card/icon-card/icon-card.component';
-// import { RosterService } from '../../services/roster/roster.service';
-// import { ChangeRequestsSentService } from '../../services/change-requests/change-requests-sent/change-requests-sent.service';
-// import { ChangeRequestsReceivedService } from '../../services/change-requests/change-requests-received/change-requests-received.service';
-// import { HoursService } from '../../services/hours/hours.service';
 import { ChangeRequestsReceivedService } from '../../services/change-requests/change-requests-received/change-requests-received.service';
 import { ChangeRequestsSentService } from '../../services/change-requests/change-requests-sent/change-requests-sent.service';
 import { HoursService } from '../../services/hours/hours.service';
+import { MessagesService } from '../../services/messages/messages.service';
+import { PinnedMessagesService } from '../../services/messages/pinned-messages/pinned-messages.service';
 import { RosterService } from '../../services/roster/roster.service';
+import { ScreenService } from '../../services/screen/screen.service';
+import { WarningsService } from '../../services/warnings/warnings.service';
+import { IconCardComponent } from '../shared/card/icon-card/icon-card.component';
 import { RosterCardComponent } from '../shared/card/roster-card/roster-card.component';
 import { TableCardComponent } from '../shared/card/table-card/table-card.component';
 import { MatTableHeaders } from '../shared/models/mat-table-headers.interface';
@@ -33,13 +31,17 @@ import { MatTableHeaders } from '../shared/models/mat-table-headers.interface';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  warningsService = inject(WarningsService);
-  messagesService = inject(MessagesService);
-  pinnedMessagesService = inject(PinnedMessagesService);
-  rosterService = inject(RosterService);
-  changeRequestsSentService = inject(ChangeRequestsSentService);
-  changeRequestsReceivedService = inject(ChangeRequestsReceivedService);
-  hoursService = inject(HoursService);
+  readonly messagesService = inject(MessagesService);
+  readonly warningsService = inject(WarningsService);
+  readonly pinnedMessagesService = inject(PinnedMessagesService);
+  readonly rosterService = inject(RosterService);
+  readonly changeRequestsSentService = inject(ChangeRequestsSentService);
+  readonly changeRequestsReceivedService = inject(
+    ChangeRequestsReceivedService
+  );
+  readonly hoursService = inject(HoursService);
+  private readonly breakpointObserver = inject(BreakpointObserver);
+  private readonly screenService = inject(ScreenService);
 
   tableHeadersChangeRequestsReceived: MatTableHeaders = {
     header1: 'ROSTER',
@@ -64,4 +66,55 @@ export class DashboardComponent {
     header4: 'PERIOD',
     header5: 'HOURS',
   };
+
+  mobileTableHeadersHours: MatTableHeaders = {
+    header1: 'LIC_U',
+    header2: 'ROLE',
+    header3: 'LAST W.',
+    header4: 'PERIOD',
+    header5: 'H',
+  };
+
+  sections = [1, 2];
+  currentSectionIndex = 0;
+  isMobile = false;
+  isTablet = false;
+  ngOnInit(): void {
+    this.breakpointObserver
+      .observe([
+        '(max-width: 600px)',
+        '(min-width: 601px) and (max-width: 1024px)',
+      ])
+      .subscribe((result: BreakpointState) => {
+        this.isMobile = result.breakpoints['(max-width: 600px)'] ?? false;
+        this.isTablet =
+          result.breakpoints['(min-width: 601px) and (max-width: 1024px)'] ??
+          false;
+        this.screenService.setIsMobile(this.isMobile);
+        this.screenService.setIsTablet(this.isTablet);
+
+        if (!this.isMobile && !this.isTablet) {
+          this.currentSectionIndex = 0;
+        }
+      });
+  }
+
+  get currentSection() {
+    return this.sections[this.currentSectionIndex];
+  }
+
+  onSwipeLeft() {
+    if (
+      (this.isMobile || this.isTablet) &&
+      this.currentSectionIndex < this.sections.length - 1
+    ) {
+      this.currentSectionIndex++;
+    }
+  }
+
+  onSwipeRight() {
+    if ((this.isMobile || this.isTablet) && this.currentSectionIndex > 0) {
+      this.currentSectionIndex--;
+    }
+  }
 }

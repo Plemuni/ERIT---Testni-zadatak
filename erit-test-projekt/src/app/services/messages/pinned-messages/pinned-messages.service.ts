@@ -20,7 +20,10 @@ export class PinnedMessagesService {
         title: 'ACC ROMA',
         content: `Porta lorem mollis aliquam ut porttitor,lacinia quis vel eros donec ac odio tempor orci....`,
       },
-      buttons: [{ src: 'pinned.png', pin: 'unpin' }],
+      buttons: [
+        { src: 'no-response.png' },
+        { src: 'pinned.png', pin: 'unpin' },
+      ],
     },
     {
       id: 2,

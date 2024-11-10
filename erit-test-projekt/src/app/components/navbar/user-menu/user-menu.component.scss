@@ -1,6 +1,6 @@
 .user-menu {
   position: absolute;
-  top: 100%;
+  top: 70px;
   right: 10px;
   display: flex;
   flex-direction: column;
@@ -24,5 +24,20 @@
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+@media (max-width: 600px) {
+  .user-menu {
+    top: 86px;
+    background-color: #eaeaea;
+    width: 96px;
+    height: 137px;
+    overflow: hidden;
+  }
+
+  .user-menu .menu-item {
+    color: var(--secondary-color);
+    font-size: 12px;
+    line-height: 15.6px;
   }
 }

@@ -1,3 +1,31 @@
+@if(isMobile){
+<div class="navbar">
+  <div class="navbar-title"></div>
+  <div class="navbar-actions">
+    <app-button
+      icon="person"
+      ariaLabel="User Profile"
+      (buttonClick)="onToggleProfileDropdown()"
+    ></app-button>
+
+    <app-button
+      icon="notifications"
+      ariaLabel="Notifications"
+      (buttonClick)="onToggleNotificationDropdown()"
+    ></app-button>
+  </div>
+  @if(isUserMenuVisible){
+  <app-user-menu (roleSelected)="onRoleSelected($event)"></app-user-menu>}
+</div>
+<div class="mobile-user-menu">
+  <app-button ariaLabel="User Profile" (buttonClick)="toggleUserMenu()">
+    <span class="user-info-mobile">Ime i Prezime | {{ selectedRole }}</span>
+    <div class="user-info-mobile">
+      <mat-icon>arrow_drop_down</mat-icon>
+    </div>
+  </app-button>
+</div>
+} @else {
 <div class="navbar">
   <div class="navbar-title"></div>
   <div class="navbar-actions">
@@ -23,3 +51,4 @@
   @if(isUserMenuVisible){
   <app-user-menu (roleSelected)="onRoleSelected($event)"></app-user-menu>}
 </div>
+}

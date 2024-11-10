@@ -12,7 +12,7 @@
   --icon-color-accent2: #0f75da;
   --icon-color-accent3: #45ad20;
   --icon-disabled-light: #e0e0e0;
-
+  --text-disabled: #6c6c6c;
   // Font sizes
   --font-size-title: 20px;
   --font-size-user-info: 20px;
@@ -27,8 +27,8 @@
   --padding-navbar: 0 20px;
   --padding-button: 0;
   --padding-user-menu: 10px 0;
-  --padding-notification-item: 10px;
-  --padding-notification-text: 6px 12px;
+  --padding-notification-item: 12px;
+  --padding-notification-text: 6px;
   --margin-notification-divider: 8px 16px;
   --margin-icon: 10px;
 
@@ -39,8 +39,3 @@
   // Shadows
   --box-shadow-light: 0px 0px 20px var(--divider-color);
 }
-
-// SCSS Variables for use within theme.scss (optional)
-$primary-color: var(--primary-color);
-$secondary-color: var(--secondary-color);
-// Add more SCSS variables as needed...

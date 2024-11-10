@@ -21,7 +21,7 @@ export class MessagesService {
         title: 'ACC ROMA',
         content: `Porta lorem mollis aliquam ut porttitor,lacinia quis vel eros donec ac odio tempor orci....`,
       },
-      buttons: [{ src: 'pin.png', pin: 'pin' }],
+      buttons: [{ src: 'response.png' }, { src: 'pin.png', pin: 'pin' }],
     },
     {
       id: 5,
@@ -37,7 +37,7 @@ export class MessagesService {
         title: 'AIRAC',
         content: `Porta lorem mollis aliquam ut porttitor,lacinia quis vel eros donec ac odio tempor orci....`,
       },
-      buttons: [{ src: 'pin.png', pin: 'pin' }],
+      buttons: [{ src: 'no-response.png' }, { src: 'pin.png', pin: 'pin' }],
     },
     {
       id: 6,
@@ -53,7 +53,7 @@ export class MessagesService {
         title: 'ACC ROMA',
         content: `Porta lorem mollis aliquam ut porttitor,lacinia quis vel eros donec ac odio tempor orci....`,
       },
-      buttons: [{ src: 'pin.png', pin: 'pin' }],
+      buttons: [{ src: 'no-response.png' }, { src: 'pin.png', pin: 'pin' }],
     },
   ]);
 }

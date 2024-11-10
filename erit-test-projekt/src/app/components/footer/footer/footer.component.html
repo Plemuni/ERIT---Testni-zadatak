@@ -1,0 +1,19 @@
+<div class="footer">
+  @for (item of filteredSideBarItems; track item){
+  <app-button
+    ><div>
+      <mat-icon class="icon">{{ item.icon }}</mat-icon>
+    </div>
+    <div>
+      @if(!isMobile) {<span class="label">{{ item.label }}</span
+      >}
+    </div></app-button
+  >}
+</div>
+@if (isMobile || isTablet) {
+<div class="swipe-container">
+  <mat-icon class="swipe-icon">more_horiz</mat-icon>
+</div>
+}
+<div class="corner-shape"></div>
+<div class="bottom-corner-shape"></div>

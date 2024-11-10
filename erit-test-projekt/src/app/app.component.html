@@ -1,4 +1,5 @@
 <app-navbar
+  (toggleUserMenuDropdown)="onUserMenuToggle()"
   (toggleNotificationDropdown)="onNotificationSidenavToggle()"
   (toggleProfileDropdown)="onProfileSidenavToggle()"
 ></app-navbar>
@@ -7,7 +8,7 @@
     <mat-sidenav
       position="start"
       mode="side"
-      [opened]="true"
+      [opened]="!isMobile"
       [fixedInViewport]="true"
       [fixedTopGap]="60"
       ><app-sidebar
@@ -19,7 +20,6 @@
       position="end"
       mode="over"
       [opened]="profileSidenavOpened || notificationSidenavOpened"
-      (closed)="onSidenavClosed()"
       [fixedInViewport]="true"
       [fixedTopGap]="60"
     >
@@ -29,3 +29,8 @@
     >
   </mat-sidenav-container>
 </div>
+@if (isMobile) {
+<div class="footer-container">
+  <app-footer></app-footer>
+</div>
+}

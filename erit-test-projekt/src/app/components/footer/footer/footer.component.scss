@@ -1,0 +1,99 @@
+@media ((max-width: 1024px)) {
+  .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 60px;
+    background: var(--primary-color);
+
+    app-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 10px 0;
+      gap: 8px;
+      color: var(--text-color-light);
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      .icon {
+        font-size: 24px;
+        color: inherit;
+      }
+
+      .label {
+        display: block;
+        font-family: var(--font-type-titles);
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 1.3;
+        text-align: center;
+        color: inherit;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .corner-shape {
+    position: fixed;
+    top: 70px;
+    left: 0px;
+    width: 45px;
+    height: 45px;
+    background: radial-gradient(
+      circle at bottom right,
+      transparent 45px,
+      var(--primary-color) 36px
+    );
+  }
+
+  .bottom-corner-shape {
+    position: fixed;
+    bottom: 60px;
+    right: 0px;
+    width: 45px;
+    height: 45px;
+    background: radial-gradient(
+      circle at top left,
+      transparent 45px,
+      var(--primary-color) 36px
+    );
+  }
+
+  .swipe-container {
+    max-width: 100vw;
+    text-align: center;
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    bottom: 105px;
+  }
+
+  .swipe-icon {
+    font-size: 36px;
+    color: var(--icon-disabled-light);
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    height: 52px;
+  }
+
+  .bottom-corner-shape {
+    bottom: 52px;
+  }
+
+  .corner-shape {
+    top: 52px;
+  }
+}

@@ -1,13 +1,13 @@
 .sidebar {
   position: fixed;
-  top: 60px;
+  top: 70px;
   left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px 0;
-  width: 80px;
-  height: calc(100vh - 60px);
+  width: 70px;
+  height: calc(100vh - 70px);
   background: var(--primary-color);
 
   app-button {
@@ -45,8 +45,8 @@
 
 .corner-shape {
   position: fixed;
-  top: 60px;
-  left: 80px;
+  top: 70px;
+  left: 70px;
   width: 45px;
   height: 45px;
   background: radial-gradient(

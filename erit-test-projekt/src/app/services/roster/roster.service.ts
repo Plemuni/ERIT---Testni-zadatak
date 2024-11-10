@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { RosterCardData } from '../../components/shared/models/roster-card.interface';
 import { BehaviorSubject } from 'rxjs';
+import { RosterCardData } from '../../components/shared/models/roster-card.interface';
 
 @Injectable({
   providedIn: 'root',

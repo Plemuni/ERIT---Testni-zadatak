@@ -4,12 +4,10 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class ScreenService {
-  // Signals for responsive states
   public isMobileSignal = signal(false);
   public isTabletSignal = signal(false);
   public isSmallHeightScreenSignal = signal(false);
 
-  // Methods to update the signals
   setIsMobile(value: boolean) {
     this.isMobileSignal.set(value);
   }

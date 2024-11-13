@@ -1,16 +1,9 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  DestroyRef,
-  EventEmitter,
-  inject,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ScreenService } from '../../services/screen/screen.service';
 import { ButtonComponent } from '../shared/button/button.component';
 import { UserMenuComponent } from './user-menu/user-menu.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-navbar',
@@ -27,17 +20,8 @@ export class NavbarComponent {
   isNotificationDropdownVisible = false;
   isUserMenuVisible = false;
   selectedRole = 'User';
-  isMobile = false;
   private readonly screenService = inject(ScreenService);
-  destroyRef = inject(DestroyRef);
-
-  ngOnInit(): void {
-    this.screenService.isMobileSubject$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((isMobile) => {
-        this.isMobile = isMobile;
-      });
-  }
+  isMobile = this.screenService.isMobileSignal;
 
   onToggleProfileDropdown() {
     this.toggleProfileDropdown.emit();

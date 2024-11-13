@@ -1,16 +1,15 @@
+import { CdkTableDataSourceInput } from '@angular/cdk/table';
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { ScreenService } from '../../../../services/screen/screen.service';
 import {
   ChangeRequestItem,
   WorkTimeItem,
 } from '../../models/data-card.interface';
-import { CdkTableDataSourceInput } from '@angular/cdk/table';
 import { MatTableHeaders } from '../../models/mat-table-headers.interface';
-import { ScreenService } from '../../../../services/screen/screen.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-table-card',
@@ -24,18 +23,9 @@ export class TableCardComponent {
   @Input() title?: string;
   @Input() tableHeaders!: MatTableHeaders;
   @Input() items: ChangeRequestItem[] | WorkTimeItem[] = [];
-  isMobile: boolean = false;
   private readonly screenService = inject(ScreenService);
   collapsed = false;
-  destroyRef = inject(DestroyRef);
-
-  ngOnInit(): void {
-    this.screenService.isMobileSubject$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((isMobile) => {
-        this.isMobile = isMobile;
-      });
-  }
+  isMobile = this.screenService.isMobileSignal;
 
   get displayedColumns(): string[] {
     return Object.values(this.tableHeaders);
@@ -45,7 +35,7 @@ export class TableCardComponent {
     if (this.isChangeRequestItems(this.items)) {
       return this.items;
     } else {
-      return this.isMobile
+      return this.isMobile()
         ? (this.items.slice(0, 2) as WorkTimeItem[])
         : this.items;
     }
@@ -61,7 +51,7 @@ export class TableCardComponent {
 
   getSenderDisplayName(sender: string | undefined): string {
     if (!sender) return '';
-    return this.isMobile
+    return this.isMobile()
       ? sender
           .split(' ')
           .map((word) => word.charAt(0))

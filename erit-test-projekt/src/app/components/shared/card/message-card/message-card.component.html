@@ -9,9 +9,9 @@
   <mat-card-content class="card-content">
     @if(!items.length) {
     <b>No messages.</b>
-    } @else { @for (item of isMobile ? limitedItems : items; track item) {
+    } @else { @for (item of isMobile() ? limitedItems : items; track item) {
     <div class="item">
-      @if(isMobile) {
+      @if(isMobile()) {
       <div class="icon-card-icons">
         @if(item.itemIcon.src){<img
           [src]="item.itemIcon.src"

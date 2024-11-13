@@ -1,16 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { take } from 'rxjs';
+import { MessagesService } from '../../../../services/messages/messages.service';
+import { PinnedMessagesService } from '../../../../services/messages/pinned-messages/pinned-messages.service';
+import { ScreenService } from '../../../../services/screen/screen.service';
 import {
   MessageCardItem,
   PinButton,
 } from '../../models/message-card.interface';
-import { MessagesService } from '../../../../services/messages/messages.service';
-import { PinnedMessagesService } from '../../../../services/messages/pinned-messages/pinned-messages.service';
-import { ScreenService } from '../../../../services/screen/screen.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'app-message-card',
@@ -22,7 +21,6 @@ import { take } from 'rxjs';
 export class MessageCardComponent {
   messagesService = inject(MessagesService);
   pinnedMessagesService = inject(PinnedMessagesService);
-  destroyRef = inject(DestroyRef);
 
   @Input() title?: string;
   @Input() collapsable?: boolean;
@@ -31,16 +29,7 @@ export class MessageCardComponent {
 
   collapsed = false;
 
-  isMobile: boolean = false;
-  private readonly screenService = inject(ScreenService);
-
-  ngOnInit(): void {
-    this.screenService.isMobileSubject$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((isMobile) => {
-        this.isMobile = isMobile;
-      });
-  }
+  isMobile = inject(ScreenService).isMobileSignal;
 
   public onPinClicked(item: MessageCardItem, pin?: PinButton): void {
     if (!pin) {
@@ -86,7 +75,7 @@ export class MessageCardComponent {
   }
 
   get limitedItems(): MessageCardItem[] {
-    return this.isMobile && this.title === 'New messages'
+    return this.isMobile() && this.title === 'New messages'
       ? this.items.slice(0, 2)
       : this.items;
   }

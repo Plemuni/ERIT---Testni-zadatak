@@ -1,19 +1,24 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ScreenService {
-  public isMobileSubject$ = new BehaviorSubject<boolean>(false);
+  // Signals for responsive states
+  public isMobileSignal = signal(false);
+  public isTabletSignal = signal(false);
+  public isSmallHeightScreenSignal = signal(false);
 
-  public isTabletSubject$ = new BehaviorSubject<boolean>(false);
-
+  // Methods to update the signals
   setIsMobile(value: boolean) {
-    this.isMobileSubject$.next(value);
+    this.isMobileSignal.set(value);
   }
 
   setIsTablet(value: boolean) {
-    this.isTabletSubject$.next(value);
+    this.isTabletSignal.set(value);
+  }
+
+  setIsSmallHeightScreen(value: boolean) {
+    this.isSmallHeightScreenSignal.set(value);
   }
 }

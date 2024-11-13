@@ -5,12 +5,12 @@
       <mat-icon class="icon">{{ item.icon }}</mat-icon>
     </div>
     <div>
-      @if(!isMobile) {<span class="label">{{ item.label }}</span
+      @if(isTablet()) {<span class="label">{{ item.label }}</span
       >}
     </div></app-button
   >}
 </div>
-@if (isMobile || isTablet) {
+@if (isMobile() || isTablet()) {
 <div class="swipe-container">
   <mat-icon class="swipe-icon">more_horiz</mat-icon>
 </div>
